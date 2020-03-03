@@ -1,22 +1,27 @@
 ﻿@model IEnumerable<Student>
 
-@{ 
-    ViewBag.Title = "起始页";
+@{
+    ViewBag.Title = "学生列表";
 }
 
-<h1>学生详情</h1>
-@foreach (var student in Model)
-{
-    <p>姓名：@student.Name</p>
-    <p>班级：@student.ClassName</p>
-    <p>邮箱：@student.Email</p>
-    <a asp-controller="home" asp-action="details" asp-route-id=@student.Id>查看详情</a>
-    <img src="~/images/img-1.jpg" asp-append-version="true"/>
-}
+<div class="card-deck">
+    @foreach (var student in Model)
+    {
+        <div class="card m-3">
+            <div class="card-header">
+                <h3>@student.Name</h3>
+            </div>
 
-@section Script
-{
+            <img class="card-img-top" src="~/images/timg.jpg" asp-append-version="true" />
+            <div class="card-footer text-center">
 
-   <script src="~/js/CustomScript.js" ></script>
-}
+                <a asp-controller="home" asp-action="details" asp-route-id="@student.Id" class="btn btn-primary m-1">查看</a>
+
+
+                <a href="#" class="btn btn-primary m-1">编辑</a>
+                <a href="#" class="btn btn-danger m-1">删除</a>
+            </div>
+        </div>
+    }
+</div>
 
