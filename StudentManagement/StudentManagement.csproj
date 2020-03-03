@@ -7,8 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="456\**" />
+    <Content Remove="456\**" />
+    <EmbeddedResource Remove="456\**" />
+    <None Remove="456\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\css\" />
-    <Folder Include="456\" />
   </ItemGroup>
 
   <ItemGroup>
