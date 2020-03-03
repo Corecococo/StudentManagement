@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Student>
+
+@{ 
+    ViewBag.Title = "起始页";
+}
+
+<h1>学生详情</h1>
+@foreach (var student in Model)
+{
+    <p>姓名：@student.Name</p>
+    <p>班级：@student.ClassName</p>
+    <p>邮箱：@student.Email</p>
+    <a asp-controller="home" asp-action="details" asp-route-id=@student.Id>查看详情</a>
+    <img src="~/images/img-1.jpg" asp-append-version="true"/>
+}
+
+@section Script
+{
+
+   <script src="~/js/CustomScript.js" ></script>
+}
+
