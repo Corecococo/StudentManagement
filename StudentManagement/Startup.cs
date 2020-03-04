@@ -65,17 +65,17 @@ namespace StudentManagement
             //app.UseMvcWithDefaultRoute();
 
             //使用自定义路由,通过模板映射规则寻找URL
-            app.UseMvc(route => route.MapRoute("default","abc/{controller}/{action}/{id}"));
+            app.UseMvc(routes => routes.MapRoute("default", "{controller}/{action}/{id?}"));
 
             /*更自由的路由方式，属性路由，只开启MVC服务，路由规则到控制器下配置,该方式可以完全自定义URL而不必按照{controller}/{action}/{id}
             模板定义路由规则，但其弊端是每个自定义的URL都需要到具体方法下配置，且被属性路由修饰过的方法会覆盖常规路由，可和常规自定义路由结合使用*/
-           /* app.UseMvc();
+            /* app.UseMvc();
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World");
-            });
-*/
+             app.Run(async (context) =>
+             {
+                 await context.Response.WriteAsync("Hello World");
+             });
+ */
             /*app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>

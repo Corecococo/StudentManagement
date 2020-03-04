@@ -20,5 +20,10 @@ namespace StudentManagement.Controllers
         {
             return "Departments中的part()方法";
         }
+
+        public ViewResult test()
+        {
+            return View();
+        }
     }
 }
