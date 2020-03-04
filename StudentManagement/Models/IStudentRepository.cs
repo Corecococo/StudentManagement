@@ -9,5 +9,6 @@ namespace StudentManagement.Models
     {
         Student GetStudent(int Id);
         IEnumerable<Student> GetAllStudent();
+        Student Add(Student student);
     }
 }

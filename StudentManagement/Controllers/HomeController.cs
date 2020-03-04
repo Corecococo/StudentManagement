@@ -44,9 +44,19 @@ namespace StudentManagement.Controllers
             return View(homeDetailsViewModels);
         }
 
+        //当方法出现重载时，需要为方法添加说明，当前方法为GET请求时执行
+        [HttpGet]
         public ViewResult Create()
         {
             return View();
+        }
+
+        //进行模型绑定并重定向，参数中数据为已绑定的模型
+        [HttpPost]
+        public RedirectToActionResult Create(Student student)
+        {
+            Student newStudent = studentRepository.Add(student);
+            return RedirectToAction("Details",new { newStudent.Id });
         }
     }
 }

@@ -14,7 +14,7 @@ namespace StudentManagement.Models
 
         public string Name { get; set; }
 
-        public string ClassName { get; set; }
+        public ClassNameEnum ClassName { get; set; }
 
         public string Email { get; set; }
     }
