@@ -7,7 +7,7 @@ namespace StudentManagement.Models
 {
     public class MockStudentRepository:IStudentRepository
     {
-        private List<Student> students;
+        private readonly List<Student> students;
 
         public MockStudentRepository()
         {
@@ -26,6 +26,11 @@ namespace StudentManagement.Models
             return student;
         }
 
+        public Student Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Student> GetAllStudent()
         {
             return students;
@@ -34,6 +39,11 @@ namespace StudentManagement.Models
         public Student GetStudent(int Id)
         {
             return students.FirstOrDefault(student => student.Id == Id);
+        }
+
+        public Student Update(Student student)
+        {
+            throw new NotImplementedException();
         }
     }
 }

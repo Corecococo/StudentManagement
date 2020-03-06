@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -30,19 +31,24 @@ namespace StudentManagement
             services.AddMvc(options => options.EnableEndpointRouting = false).AddXmlSerializerFormatters();
 
             //注册依赖注入服务，将接口和实现类绑定
-            services.AddTransient<IStudentRepository, MockStudentRepository>();
+            services.AddSingleton<IStudentRepository, MockStudentRepository>();
+
+            //注册数据库服务
+            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("StudentDBConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILogger<Startup> logger)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             //开发者异常页面中间件用于开发环境下使用，快速定位错误信息，需注册在前
             if (env.IsDevelopment())
             {
                 //对异常页进行配置
-                DeveloperExceptionPageOptions developerExceptionPageOptions = new DeveloperExceptionPageOptions();
-                //设置报错代码行数
-                developerExceptionPageOptions.SourceCodeLineCount = 25;
+                DeveloperExceptionPageOptions developerExceptionPageOptions = new DeveloperExceptionPageOptions
+                {
+                    //设置报错代码行数
+                    SourceCodeLineCount = 25
+                };
                 app.UseDeveloperExceptionPage(developerExceptionPageOptions);
             }
 

@@ -53,10 +53,14 @@ namespace StudentManagement.Controllers
 
         //进行模型绑定并重定向，参数中数据为已绑定的模型
         [HttpPost]
-        public RedirectToActionResult Create(Student student)
+        public IActionResult Create(Student student)
         {
-            Student newStudent = studentRepository.Add(student);
-            return RedirectToAction("Details",new { newStudent.Id });
+            if (ModelState.IsValid)
+            {
+                Student newStudent = studentRepository.Add(student);
+                return RedirectToAction("Details", new { newStudent.Id });
+            }
+            return View();
         }
     }
 }
