@@ -30,7 +30,7 @@ namespace StudentManagement
             services.AddMvc(options => options.EnableEndpointRouting = false).AddXmlSerializerFormatters();
 
             //注册依赖注入服务，将接口和实现类绑定
-            services.AddTransient<IStudentRepository, MockStudentRepository>();
+            services.AddSingleton<IStudentRepository, MockStudentRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
