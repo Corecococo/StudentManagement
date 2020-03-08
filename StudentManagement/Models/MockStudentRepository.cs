@@ -19,6 +19,11 @@ namespace StudentManagement.Models
             };
         }
 
+        /// <summary>
+        /// 增
+        /// </summary>
+        /// <param name="student"></param>
+        /// <returns></returns>
         public Student Add(Student student)
         {
             student.Id = students.Max(student => student.Id) + 1;
@@ -26,24 +31,57 @@ namespace StudentManagement.Models
             return student;
         }
 
+        /// <summary>
+        /// 删
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Student Delete(int id)
         {
-            throw new NotImplementedException();
+            Student student = students.FirstOrDefault(s => s.Id == id);
+            if (student != null)
+            { 
+            students.Remove(student);
+
+            }
+            return student;
         }
 
+
+        /// <summary>
+        /// 迭代
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<Student> GetAllStudent()
         {
             return students;
         }
 
+        /// <summary>
+        /// 查
+        /// </summary>
+        /// <param name="Id"></param>
+        /// <returns></returns>
         public Student GetStudent(int Id)
         {
             return students.FirstOrDefault(student => student.Id == Id);
         }
 
+        /// <summary>
+        /// 改
+        /// </summary>
+        /// <param name="student"></param>
+        /// <returns></returns>
         public Student Update(Student student)
         {
-            throw new NotImplementedException();
+            Student upStudent = students.FirstOrDefault(s => s.Id == student.Id);
+            if(upStudent != null)
+            {
+                upStudent.Name = student.Name;
+                upStudent.ClassName = student.ClassName;
+                upStudent.Email = student.Email;
+            }
+            return student;
         }
     }
 }

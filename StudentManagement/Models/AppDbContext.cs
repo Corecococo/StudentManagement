@@ -10,10 +10,11 @@ namespace StudentManagement.Models
     public class AppDbContext : DbContext
     {
 
-        public AppDbContext([NotNullAttribute] DbContextOptions options) : base(options)
+        public AppDbContext(DbContextOptions options) : base(options)
         {
         }
 
+        //DbSet可理解为一个数据库表对象
         public DbSet<Student> Students { get; set; }
     }
 }
