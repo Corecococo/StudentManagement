@@ -9,12 +9,16 @@ namespace StudentManagement.Models
 {
     public class AppDbContext : DbContext
     {
-
-        public AppDbContext(DbContextOptions options) : base(options)
+        //下面的写法其实是调用基类的含参构造方法public DbContext([NotNullAttribute] DbContextOptions options);
+        public AppDbContext([NotNullAttribute] DbContextOptions options) : base(options)
         {
         }
 
-        //DbSet可理解为一个数据库表对象
         public DbSet<Student> Students { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Seed();
+        }
     }
 }
