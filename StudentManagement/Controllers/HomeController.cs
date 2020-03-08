@@ -62,5 +62,22 @@ namespace StudentManagement.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public ViewResult Update()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult Update(Student student)
+        {
+            if(ModelState.IsValid)
+            {
+                Student upStudent = studentRepository.Update(student);
+                return RedirectToAction("Details", new { upStudent.Id });
+            }
+            return View();
+        }
     }
 }

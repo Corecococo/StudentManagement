@@ -31,10 +31,10 @@ namespace StudentManagement
             services.AddMvc(options => options.EnableEndpointRouting = false).AddXmlSerializerFormatters();
 
             //注册依赖注入服务，将接口和实现类绑定
-            services.AddSingleton<IStudentRepository, MockStudentRepository>();
+            services.AddScoped<IStudentRepository, SQLStudentRepository>();
 
-            //注册数据库服务
-            services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("StudentDBConnection")));
+            //注册数据库服务(添加数据库连接池)
+           services.AddDbContextPool<AppDbContext>(options => options.UseSqlServer(_configuration.GetConnectionString("StudentDBConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,14 +52,14 @@ namespace StudentManagement
                 app.UseDeveloperExceptionPage(developerExceptionPageOptions);
             }
 
-/*
-            //对默认文件中间件的默认文件做配置
-            DefaultFilesOptions defaultFiles = new DefaultFilesOptions();
-            defaultFiles.DefaultFileNames.Clear();
-            defaultFiles.DefaultFileNames.Add("52abp.com.html");
+            /*
+                        //对默认文件中间件的默认文件做配置
+                        DefaultFilesOptions defaultFiles = new DefaultFilesOptions();
+                        defaultFiles.DefaultFileNames.Clear();
+                        defaultFiles.DefaultFileNames.Add("52abp.com.html");
 
-            //添加默认文件中间件，可打开非wwwroot文件夹的文件，该中间件必须注册在UseStaticFiles中间件之前，否则无法生效
-            app.UseDefaultFiles(defaultFiles);*/
+                        //添加默认文件中间件，可打开非wwwroot文件夹的文件，该中间件必须注册在UseStaticFiles中间件之前，否则无法生效
+                        app.UseDefaultFiles(defaultFiles);*/
 
             //添加静态文件中间件，用于打开wwwroot文件夹中的文件
             app.UseStaticFiles();
@@ -75,20 +75,20 @@ namespace StudentManagement
 
             /*更自由的路由方式，属性路由，只开启MVC服务，路由规则到控制器下配置,该方式可以完全自定义URL而不必按照{controller}/{action}/{id}
             模板定义路由规则，但其弊端是每个自定义的URL都需要到具体方法下配置，且被属性路由修饰过的方法会覆盖常规路由，可和常规自定义路由结合使用*/
-            /* app.UseMvc();
+            //app.UseMvc();
 
-             app.Run(async (context) =>
+            /* app.Run(async (context) =>
              {
-                 await context.Response.WriteAsync("Hello World");
+                 await context.Response.WriteAsync(_configuration.GetConnectionString("StudentDBConnection"));
              });
  */
-            /*app.UseEndpoints(endpoints =>
+           /* app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", async context =>
                 {
                     //var processName = System.Diagnostics.Process.GetCurrentProcess().ProcessName;
-                    *//*var configureValue = _configuration["MyKey"];*//*
-                    await context.Response.WriteAsync("第三个中间件 ");
+                    //var configureValue = _configuration["MyKey"];
+                    await context.Response.WriteAsync(_configuration.GetConnectionString("StudentDBConnection"));
                 });
             });*/
         }

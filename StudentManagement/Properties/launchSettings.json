@@ -12,8 +12,7 @@
       "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development",
-        "MyKey": "appsettings.launchsetting.json中MyKey的值"
+        "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
     "StudentManagement": {

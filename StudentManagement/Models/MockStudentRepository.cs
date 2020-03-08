@@ -28,7 +28,12 @@ namespace StudentManagement.Models
 
         public Student Delete(int id)
         {
-            throw new NotImplementedException();
+            Student student = students.FirstOrDefault(s => s.Id == id);
+            if(student != null)
+            {
+                students.Remove(student);
+            }
+            return student;
         }
 
         public IEnumerable<Student> GetAllStudent()
@@ -43,7 +48,14 @@ namespace StudentManagement.Models
 
         public Student Update(Student student)
         {
-            throw new NotImplementedException();
+            Student upStudent = students.FirstOrDefault(s => s.Id == student.Id);
+            if(student != null)
+            {
+                upStudent.Name = student.Name;
+                upStudent.ClassName = student.ClassName;
+                upStudent.Email = student.Email;
+            }
+            return upStudent;
         }
     }
 }
